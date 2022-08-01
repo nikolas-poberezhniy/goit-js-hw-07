@@ -30,16 +30,13 @@ const itemsMarcup = createItemsMarcup(galleryItems);
 
 populateGallery(itemsMarcup);
 
-refs.gallery.addEventListener('click', openModaWindow);
-
-let instance;
-
-function openModaWindow(evt) {
+refs.gallery.addEventListener('click', evt => {
   evt.preventDefault();
+
   const imageOriginalSource = evt.target.dataset.source;
 
-  instance = basicLightbox.create(
-    `<img src="${imageOriginalSource}" width="1280">
+  const instance = basicLightbox.create(
+    `<img src=${imageOriginalSource}>
   `,
     {
       onShow: () => {
@@ -53,12 +50,13 @@ function openModaWindow(evt) {
     }
   );
 
+  instance.show();
+
   function escClose(e) {
     if (e.code === 'Escape' && instance.visible()) {
       console.log(`Close with Escape`);
       instance.close();
-      document.removeEventListener('keydown', escClose);
+      // document.removeEventListener('keydown', escClose);
     }
   }
-  instance.show();
-}
+});
