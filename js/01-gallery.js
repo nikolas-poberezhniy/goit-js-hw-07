@@ -22,13 +22,7 @@ function createItemsMarcup(array) {
     .join('');
 }
 
-function populateGallery(markup) {
-  refs.gallery.innerHTML = markup;
-}
-
-const itemsMarcup = createItemsMarcup(galleryItems);
-
-populateGallery(itemsMarcup);
+refs.gallery.innerHTML = createItemsMarcup(galleryItems);
 
 refs.gallery.addEventListener('click', openModaWindow);
 
