@@ -54,7 +54,7 @@ function openModaWindow(evt) {
   );
 
   function escClose(e) {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && instance.visible()) {
       console.log(`Close with Escape`);
       instance.close();
       document.removeEventListener('keydown', escClose);
