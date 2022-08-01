@@ -30,27 +30,26 @@ const itemsMarcup = createItemsMarcup(galleryItems);
 
 populateGallery(itemsMarcup);
 
-refs.gallery.addEventListener('click', evt => {
-  evt.preventDefault();
+refs.gallery.addEventListener('click', openModaWindow);
 
+function openModaWindow(evt) {
+  evt.preventDefault();
   const imageOriginalSource = evt.target.dataset.source;
 
   const instance = basicLightbox.create(
-    `<img src=${imageOriginalSource}>
+    `<img src="${imageOriginalSource}" width="1280">
   `,
     {
       onShow: () => {
         console.log('open');
         document.addEventListener('keydown', escClose);
       },
-      onСlose: () => {
+      onClose: () => {
         console.log('close');
         document.removeEventListener('keydown', escClose);
       },
     }
   );
-
-  instance.show();
 
   function escClose(e) {
     if (e.code === 'Escape' && instance.visible()) {
@@ -59,4 +58,5 @@ refs.gallery.addEventListener('click', evt => {
       // document.removeEventListener('keydown', escClose);
     }
   }
-});
+  instance.show();
+}
