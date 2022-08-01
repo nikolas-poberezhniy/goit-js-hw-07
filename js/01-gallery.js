@@ -1,7 +1,7 @@
-import { galleryItems } from "./gallery-items.js";
+import { galleryItems } from './gallery-items.js';
 
 const refs = {
-  gallery: document.querySelector(".gallery"),
+  gallery: document.querySelector('.gallery'),
 };
 
 function createItemsMarcup(array) {
@@ -19,7 +19,7 @@ function createItemsMarcup(array) {
         </a>
     </div>`
     )
-    .join("");
+    .join('');
 }
 
 function populateGallery(markup) {
@@ -30,7 +30,7 @@ const itemsMarcup = createItemsMarcup(galleryItems);
 
 populateGallery(itemsMarcup);
 
-refs.gallery.addEventListener("click", openModaWindow);
+refs.gallery.addEventListener('click', openModaWindow);
 
 let instance;
 
@@ -43,10 +43,14 @@ function openModaWindow(evt) {
 `);
 
   instance.show();
-}
 
-document.addEventListener("keydown", ({ code }) => {
-  if (code === "Escape") {
-    instance.close();
-  }
-});
+  document.addEventListener(
+    'keydown',
+    ({ code }) => {
+      if (code === 'Escape') {
+        instance.close();
+      }
+    },
+    { once: true }
+  );
+}
