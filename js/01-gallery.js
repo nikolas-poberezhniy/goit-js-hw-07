@@ -37,20 +37,28 @@ let instance;
 function openModaWindow(evt) {
   evt.preventDefault();
   const imageOriginalSource = evt.target.dataset.source;
-  console.log(imageOriginalSource);
-  instance = basicLightbox.create(`
-    <img src="${imageOriginalSource}" width="1280">
-`);
 
-  instance.show();
-
-  document.addEventListener(
-    'keydown',
-    ({ code }) => {
-      if (code === 'Escape') {
-        instance.close();
-      }
-    },
-    { once: true }
+  instance = basicLightbox.create(
+    `<img src="${imageOriginalSource}" width="1280">
+  `,
+    {
+      onShow: () => {
+        console.log('open');
+        document.addEventListener('keydown', escClose);
+      },
+      onСlose: () => {
+        console.log('close');
+        document.removeEventListener('keydown', escClose);
+      },
+    }
   );
+
+  function escClose(e) {
+    if (e.code === 'Escape') {
+      console.log(`Close with Escape`);
+      instance.close();
+      document.removeEventListener('keydown', escClose);
+    }
+  }
+  instance.show();
 }
